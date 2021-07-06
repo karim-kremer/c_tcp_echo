@@ -3,7 +3,7 @@
 				echoclient.c: 
 
 Dieses Client-Programm liest einen Text ein und sendet ihn zum Server. 
-Anschlie�end wird der modifizierte Text vom Server wieder empfangen.
+Anschliessend wird der modifizierte Text vom Server wieder empfangen.
 
 *****************************************************************************/
 
@@ -15,7 +15,7 @@ int main(int argc, char** argv) {
 	struct 	hostent		*host_info; /* Host-Struktur hier aufgebaut */
 	struct 	sockaddr_in	server;     /* Server-Adresse hier aufgebaut */
 	int	sock;			    /* Socket-Deskriptor */
-	int	count;			    /* Z�hler f�r Zeichen */
+	int	count;			    /* Zaehler fuer Zeichen */
 	char 	line_in[MAXLEN];            /* Puffer: Client -> Server */
 	char 	line_out[MAXLEN];           /* Puffer: Server -> Client */
 
