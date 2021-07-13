@@ -11,12 +11,10 @@ Der Server kann parallel mehrere Client-Verbindungen bearbeiten.
 
 #include "echo.h"
 #include <signal.h>
-/*
-void waiter() {
-        wait(0);
-        signal(SIGCHLD,waiter); // Reinstall signal handler
+
+void term_handler() {
+        exit(0);
 }
-*/
 
 void worker(int in,int out) {
         char inbuf[MAXLEN], outbuf[MAXLEN], hostname[MAXLEN];
@@ -63,8 +61,8 @@ int main (void) {
 
 	if (listen(sock, 5) < 0) perror("listen");
 	signal(SIGCHLD, SIG_IGN);
-	// signal(SIGCHLD,waiter);
-
+        signal(SIGTERM, term_handler);
+        signal(SIGINT, term_handler);
 	while (1) {
 		client_len = sizeof(client);
 		if ((fd = accept(sock, (struct sockaddr *) &client, (socklen_t *) &client_len)) < 0) {
@@ -79,7 +77,5 @@ int main (void) {
                         exit(0);
                 } else close(fd);
 	}
-	//shutdown(fd,SHUT_RDWR);
-	//close(fd);
 	return 0;
 }
